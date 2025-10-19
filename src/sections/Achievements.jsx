@@ -5,7 +5,7 @@ const Achievements = () => {
   return (
     <section
       id="achievements"
-      className="bg-accent dark:bg-accent min-h-screen w-full flex justify-center border-t dark:border-secondary/50 py-10 px-10 md:px-20 scroll-mt-10 md:scroll-mt-0 scroll-smooth"
+      className="bg-accent dark:bg-accent min-h-screen w-full flex justify-center border-t dark:border-secondary/50 py-20 px-10 md:px-20 scroll-mt-10 md:scroll-mt-0 scroll-smooth"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -32,22 +32,22 @@ const Achievements = () => {
                 scale: 1.04,
                 boxShadow: "1px 1px 3px 5px rgba(0,0,0,0.12)",
               }}
-              className="flex flex-col items-center gap-3 py-8 px-6 bg-secondary/70 border border-background rounded-2xl shadow-lg flex-1 min-w-[230px] max-w-xs transition-all duration-200"
+              className="flex flex-col items-center gap-3 py-8 px-6 backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 border border-white/20 dark:border-white/10 rounded-2xl shadow-xl flex-1 min-w-[230px] max-w-xs transition-all duration-200"
             >
-              <div className="mb-2">
+              <div className="mb-2 bg-white/90 dark:bg-gray-800/90 rounded-lg p-2">
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
                   {item.logo?<img
                     src={item.logo}
                     alt="Postman Certification Badge"
-                    className="w-40 h-40 md:w-50 md:h-50"
-                  />:(<div className="w-37 h-37 md:w-50 md:h-50">{item.icon}</div>)}
+                    className="w-40 h-40 md:w-50 md:h-50 opacity-100"
+                  />:(<div className="w-37 h-37 md:w-50 md:h-50 opacity-100">{item.icon}</div>)}
                 </a>
               </div>
               <div className="">
-              <h4 className="text-lg text-center md:text-xl font-bold text-primary dark:text-primary mb-1">
+              <h4 className="text-lg text-center md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">
                 {item.title}
               </h4>
-              <p className="text-sm md:text-base text-primary/80 text-center leading-relaxed">
+              <p className="text-sm md:text-base text-gray-800 dark:text-gray-200 text-center leading-relaxed">
                 {item.description}
               </p>
               </div>
