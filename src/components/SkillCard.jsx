@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import LanguageIcon from "./LanguageIcon";
 
-const SkillCard = ({ language }) => {
+const SkillCard = ({ language, variants }) => {
   return (
     <motion.div
+      variants={variants}
       whileHover={{ scale: 1.05 }}
       className="flex flex-col items-center gap-3 p-4 rounded-xl text-center cursor-pointer group backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 border border-white/20 dark:border-white/10 shadow-lg"
     >
