@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
 
-export const CTAButton = ({ text, link, icon: Icon, download = false }) => {
+export const CTAButton = ({ text, link, icon: Icon, download = false, onClick }) => {
   const ref = useRef(null);
   const [ripples, setRipples] = useState([]);
   
@@ -35,13 +35,22 @@ export const CTAButton = ({ text, link, icon: Icon, download = false }) => {
     setTimeout(() => {
       setRipples(prev => prev.filter(r => r.id !== newRipple.id));
     }, 600);
+    
+    // Call onClick handler if provided
+    if (onClick) {
+      onClick(e);
+    }
   };
 
+  const Component = onClick ? motion.button : motion.a;
+  const componentProps = onClick 
+    ? { type: "button" } 
+    : { href: link, download: download };
+
   return (
-    <motion.a
+    <Component
       ref={ref}
-      href={link}
-      download={download}
+      {...componentProps}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -72,6 +81,6 @@ export const CTAButton = ({ text, link, icon: Icon, download = false }) => {
           />
         ))}
       </AnimatePresence>
-    </motion.a>
+    </Component>
   );
 };
