@@ -8,14 +8,14 @@ const ProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      className="relative bg-background/45 rounded-2xl shadow-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.02]"
+      className="relative bg-background/45 rounded-xl shadow-lg overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.01] border border-secondary/30 dark:border-secondary/30"
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Animated Title Overlay */}
       <motion.div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm z-20 flex items-center justify-center p-4"
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm z-20 flex items-center justify-center p-6"
         initial={{ opacity: 1 }}
         animate={
           isHovered
@@ -33,7 +33,7 @@ const ProjectCard = ({ project }) => {
       <motion.img
         src={project.image}
         alt={project.title}
-        className="aspect-auto border-b border-accent transition duration-500"
+        className="aspect-auto border-b border-secondary/30 transition duration-500"
         loading="lazy"
         initial={{ scale: 1 }}
         animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
@@ -42,12 +42,12 @@ const ProjectCard = ({ project }) => {
 
       {/* Project Details */}
       <motion.div
-        className="p-4 flex flex-col justify-between flex-1 z-10"
+        className="p-6 flex flex-col justify-between flex-1 z-10"
         initial={{ opacity: 0, y: 10 }}
         animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ duration: 0.4, delay: isHovered ? 0.1 : 0 }}
       >
-        <div className="space-y-2">
+        <div className="space-y-3">
           {/* Smooth Card Title Transition */}
           <motion.h3
             className="text-xl md:text-2xl font-bold text-primary dark:text-primary"
@@ -58,20 +58,20 @@ const ProjectCard = ({ project }) => {
             {project.title}
           </motion.h3>
 
-          <p className="text-primary/80 text-sm md:text-base leading-relaxed">
+          <p className="text-primary/80 text-base md:text-base leading-relaxed">
             {project.description}
           </p>
 
           {project.tags && (
             <div className="flex flex-row flex-wrap items-center gap-2">
-              <span className="text-xs md:text-sm font-semibold text-ternary/70">
+              <span className="text-sm md:text-sm font-semibold text-ternary/70">
                 Tech Stack Used :
               </span>
 
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="text-[9px] md:text-xs capitalize bg-background text-primary border border-secondary/50 px-2 py-[1.5px] md:py-1 rounded-full tracking-wide shadow-sm"
+                  className="text-xs md:text-xs capitalize bg-background text-primary border border-secondary/50 px-3 py-1 md:py-1 rounded-full tracking-wide shadow-sm"
                 >
                   {tag}
                 </span>
