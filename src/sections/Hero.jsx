@@ -29,14 +29,14 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-[100vh] flex flex-col-reverse md:flex-row md:items-center justify-evenly p-6 md:p-20 bg-background dark:bg-background"
+      className="min-h-[100vh] flex flex-col-reverse md:flex-row md:items-center justify-evenly p-6 md:p-24 bg-background dark:bg-background"
     >
       <div className="">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="space-y-6 md:max-w-[40vw]"
+          className="space-y-8 md:max-w-[40vw]"
         >
           <motion.h1
             variants={item}
@@ -52,7 +52,7 @@ const Hero = () => {
             {portfolioInfo.description}
           </motion.p>
 
-          <motion.div variants={item} className="flex flex-col gap-3">
+          <motion.div variants={item} className="flex flex-col gap-4">
             <CTAButton link="#projects" text="View Projects" icon={FaLaptop} />
             <CTAButton
               link="/LatestResume.pdf"
@@ -72,7 +72,7 @@ const Hero = () => {
         <motion.img
           src={profile}
           alt="profile"
-          className="rounded-full w-55 h-55 md:w-72 md:h-72 object-cover shadow-md border-10 dark:border-accent"
+          className="rounded-full w-60 h-60 md:w-80 md:h-80 object-cover shadow-xl border-10 dark:border-accent"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}

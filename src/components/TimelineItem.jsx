@@ -3,7 +3,7 @@ import { Briefcase, GraduationCap } from "lucide-react";
 
 const TimelineItem = ({ item }) => {
   return (
-    <div className="mb-10 ml-6 flex items-center">
+    <div className="mb-12 ml-6 flex items-center group">
       <span className="absolute -left-5 bg-secondary rounded-full pt-1.5 px-1.5">
         {item.type === "work" ? (
           <button title="Work">
@@ -15,14 +15,14 @@ const TimelineItem = ({ item }) => {
           </button>
         )}
       </span>
-      <div className="bg-accent dark:bg-accent p-5 rounded-lg shadow w-full">
-        <h3 className="font-semibold text-lg text-primary dark:text-primary opacity-90">
+      <div className="bg-accent dark:bg-accent p-6 rounded-xl shadow-md w-full hover:shadow-lg transition-all duration-200">
+        <h3 className="font-semibold text-xl text-primary dark:text-primary opacity-90 mb-1">
           {item.title}
         </h3>
-        <p className="text-sm text-primary dark:text-primary opacity-60 mb-2">
+        <p className="text-sm text-primary dark:text-primary opacity-60 mb-3">
           {item.date}
         </p>
-        <p className="text-gray-700 dark:text-ternary opacity-60">
+        <p className="text-base text-gray-700 dark:text-ternary opacity-70 leading-relaxed">
           {item.description}
         </p>
       </div>
