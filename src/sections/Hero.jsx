@@ -40,14 +40,14 @@ const Hero = () => {
         >
           <motion.h1
             variants={item}
-            className="text-4xl md:text-6xl font-bold text-primary dark:text-primary"
+            className="text-5xl md:text-6xl font-bold text-primary dark:text-primary"
           >
             Hi, I'm{" "}
             <span className="text-secondary">{portfolioInfo.fullName}</span>
           </motion.h1>
           <motion.p
             variants={fadedItem}
-            className="text-lg text-primary dark:text-primary"
+            className="text-xl text-primary dark:text-primary leading-relaxed"
           >
             {portfolioInfo.description}
           </motion.p>
