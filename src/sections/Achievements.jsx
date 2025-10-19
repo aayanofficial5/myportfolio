@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { achievements } from "../data";
+import WordReveal from "../components/WordReveal";
 
 const Achievements = () => {
   return (
@@ -16,7 +17,7 @@ const Achievements = () => {
       >
         <div className="flex flex-col items-center gap-3">
           <h2 className="text-4xl md:text-4xl font-extrabold text-primary dark:text-primary tracking-tight">
-            Achievements
+            <WordReveal text="Achievements" />
           </h2>
           <p className="text-lg md:text-lg text-primary dark:text-primary opacity-70 text-center max-w-2xl leading-relaxed">
             Explore some of my key milestones, certifications, and recognitions
@@ -28,6 +29,10 @@ const Achievements = () => {
           {achievements.map((item, index) => (
             <motion.div
               key={index}
+              initial={{ opacity: 0, x:index % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
               whileHover={{
                 scale: 1.04,
                 boxShadow: "1px 1px 3px 5px rgba(0,0,0,0.12)",
