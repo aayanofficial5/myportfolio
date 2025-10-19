@@ -18,7 +18,7 @@ const Achievements = () => {
           <h2 className="text-4xl md:text-4xl font-extrabold text-primary dark:text-primary tracking-tight">
             Achievements
           </h2>
-          <p className="text-base md:text-lg text-primary dark:text-primary opacity-70 text-center max-w-2xl">
+          <p className="text-lg md:text-lg text-primary dark:text-primary opacity-70 text-center max-w-2xl leading-relaxed">
             Explore some of my key milestones, certifications, and recognitions
             that reflect my commitment to continuous learning and excellence in
             technology.
@@ -32,7 +32,7 @@ const Achievements = () => {
                 scale: 1.04,
                 boxShadow: "1px 1px 3px 5px rgba(0,0,0,0.12)",
               }}
-              className="flex flex-col items-center gap-3 py-6 px-4 bg-secondary/70 border border-background rounded-2xl shadow-lg flex-1 min-w-[230px] max-w-xs transition-all duration-200"
+              className="flex flex-col items-center gap-3 py-8 px-6 bg-secondary/70 border border-background rounded-2xl shadow-lg flex-1 min-w-[230px] max-w-xs transition-all duration-200"
             >
               <div className="mb-2">
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
@@ -44,10 +44,10 @@ const Achievements = () => {
                 </a>
               </div>
               <div className="">
-              <h4 className="text-[16px] text-center md:text-lg font-bold text-primary dark:text-primary mb-1">
+              <h4 className="text-lg text-center md:text-xl font-bold text-primary dark:text-primary mb-1">
                 {item.title}
               </h4>
-              <p className="text-xs md:text-sm text-primary/80 text-center">
+              <p className="text-sm md:text-base text-primary/80 text-center leading-relaxed">
                 {item.description}
               </p>
               </div>
