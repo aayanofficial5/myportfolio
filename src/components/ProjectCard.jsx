@@ -1,18 +1,43 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const ProjectCard = ({ project, variants }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const ref = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateY = ((x - centerX) / centerX) * 2; // Max ±2 degrees
+    const rotateX = ((y - centerY) / centerY) * -2; // Max ±2 degrees, inverted
+    setTilt({ rotateX, rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0 });
+  };
 
   return (
     <motion.div
+      ref={ref}
       variants={variants}
-      className="relative backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.01] border border-white/20 dark:border-white/10"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+        transition: 'transform 0.1s ease-out'
+      }}
+      className="relative backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden flex flex-col group transition-all duration-300 hover:scale-[1.01] border border-white/20 dark:border-white/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onHoverEnd={() => setIsHovered(false)}
     >
       {/* Animated Title Overlay */}
       <motion.div
