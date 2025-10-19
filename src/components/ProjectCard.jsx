@@ -1,21 +1,47 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, variants }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const ref = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateY = ((x - centerX) / centerX) * 2; // Max ±2 degrees
+    const rotateX = ((y - centerY) / centerY) * -2; // Max ±2 degrees, inverted
+    setTilt({ rotateX, rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0 });
+  };
 
   return (
     <motion.div
-      className="relative bg-background/45 rounded-2xl shadow-2xl overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.02]"
+      ref={ref}
+      variants={variants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+        transition: 'transform 0.1s ease-out'
+      }}
+      className="relative backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden flex flex-col group transition-all duration-300 hover:scale-[1.01] border border-white/20 dark:border-white/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onHoverEnd={() => setIsHovered(false)}
     >
       {/* Animated Title Overlay */}
       <motion.div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm z-20 flex items-center justify-center p-4"
+        className="absolute inset-0 bg-background/90 backdrop-blur-md z-20 flex items-center justify-center p-6"
         initial={{ opacity: 1 }}
         animate={
           isHovered
@@ -33,7 +59,7 @@ const ProjectCard = ({ project }) => {
       <motion.img
         src={project.image}
         alt={project.title}
-        className="aspect-auto border-b border-accent transition duration-500"
+        className="aspect-auto border-b border-white/20 dark:border-white/10 transition duration-500"
         loading="lazy"
         initial={{ scale: 1 }}
         animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
@@ -42,12 +68,12 @@ const ProjectCard = ({ project }) => {
 
       {/* Project Details */}
       <motion.div
-        className="p-4 flex flex-col justify-between flex-1 z-10"
+        className="p-6 flex flex-col justify-between flex-1 z-10"
         initial={{ opacity: 0, y: 10 }}
         animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ duration: 0.4, delay: isHovered ? 0.1 : 0 }}
       >
-        <div className="space-y-2">
+        <div className="space-y-3">
           {/* Smooth Card Title Transition */}
           <motion.h3
             className="text-xl md:text-2xl font-bold text-primary dark:text-primary"
@@ -58,20 +84,20 @@ const ProjectCard = ({ project }) => {
             {project.title}
           </motion.h3>
 
-          <p className="text-primary/80 text-sm md:text-base leading-relaxed">
+          <p className="text-primary/80 text-base md:text-base leading-relaxed">
             {project.description}
           </p>
 
           {project.tags && (
             <div className="flex flex-row flex-wrap items-center gap-2">
-              <span className="text-xs md:text-sm font-semibold text-ternary/70">
+              <span className="text-sm md:text-sm font-semibold text-ternary/70">
                 Tech Stack Used :
               </span>
 
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="text-[9px] md:text-xs capitalize bg-background text-primary border border-secondary/50 px-2 py-[1.5px] md:py-1 rounded-full tracking-wide shadow-sm"
+                  className="text-xs md:text-xs capitalize bg-white/90 dark:bg-gray-800/90 text-primary border border-secondary/50 px-3 py-1 md:py-1 rounded-full tracking-wide shadow-sm"
                 >
                   {tag}
                 </span>

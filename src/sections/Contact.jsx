@@ -5,12 +5,25 @@ import { MdSend } from "react-icons/md";
 import { socials } from "../data";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import WordReveal from "../components/WordReveal";
 
 const {
   VITE_EMAILJS_SERVICE_ID,
   VITE_EMAILJS_TEMPLATE_ID,
   VITE_EMAILJS_PUBLIC_KEY,
 } = import.meta.env;
+
+const socialVariants = {
+  hidden: { opacity: 0, y: 10 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+    },
+  }),
+};
 
 const Contact = () => {
   const formRef = useRef();
@@ -30,7 +43,7 @@ const Contact = () => {
         VITE_EMAILJS_PUBLIC_KEY // Replace with your public key
       )
       .then(() => {
-        toast.success("Message sent successfully! I’ll get back to you soon.");
+        toast.success("Message sent successfully! I'll get back to you soon.");
         reset();
       })
       .catch(() => {
@@ -41,7 +54,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-10 px-10 md:px-20 bg-accent border-t border-secondary/50 scroll-mt-10 md:scroll-mt-0 scroll-smooth"
+      className="py-20 px-10 md:px-20 bg-accent border-t border-secondary/50 scroll-mt-10 md:scroll-mt-0 scroll-smooth"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -50,20 +63,24 @@ const Contact = () => {
         viewport={{ once: true }}
         className="max-w-4xl mx-auto"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-primary dark:text-primary">
-          Contact Me
+        <h2 className="text-4xl md:text-4xl font-bold text-center mb-12 text-primary dark:text-primary">
+          <WordReveal text="Contact Me" />
         </h2>
 
-        <form
+        <motion.form
           ref={formRef}
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-6 bg-background dark:bg-background p-8 rounded-lg shadow-md"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 gap-6 bg-background dark:bg-background p-8 rounded-xl shadow-md"
         >
           <input
             type="text"
             placeholder="Your Name"
             {...register("user_name", { required: true })}
-            className="p-3 rounded border-3 border-accent dark:border-accent text-primary dark:text-primary"
+            className="py-3 px-4 rounded border-2 border-secondary/50 dark:border-secondary/50 text-primary dark:text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
           />
           {errors.user_name && (
             <span className="text-red-500">Name is required</span>
@@ -73,7 +90,7 @@ const Contact = () => {
             type="email"
             placeholder="Your Email"
             {...register("user_email", { required: true })}
-            className="p-3 rounded border-3 border-accent dark:border-accent text-primary dark:text-primary"
+            className="py-3 px-4 rounded border-2 border-secondary/50 dark:border-secondary/50 text-primary dark:text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
           />
           {errors.user_email && (
             <span className="text-red-500">Email is required</span>
@@ -83,7 +100,7 @@ const Contact = () => {
             placeholder="Your Message"
             rows="5"
             {...register("message", { required: true })}
-            className="p-3 rounded border-3 border-accent dark:border-accent text-primary dark:text-primary"
+            className="py-3 px-4 rounded border-2 border-secondary/50 dark:border-secondary/50 text-primary dark:text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
           ></textarea>
           {errors.message && (
             <span className="text-red-500">Message is required</span>
@@ -104,29 +121,39 @@ const Contact = () => {
             Send Message
             <MdSend size={30} />
           </button>
-        </form>
+        </motion.form>
 
         <div className="flex justify-center gap-6 mt-10 text-primary">
           {socials.map(({ name, mail, icon, url }, index) => (
             <Fragment key={index}>
               {name === "email" ? (
-                <a
+                <motion.a
                   href={`mailto:${mail}`}
                   aria-label="Email"
+                  custom={index}
+                  variants={socialVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
                   className="hover:dark:text-secondary text-2xl bg-background p-2 rounded-full"
                 >
                   {icon}
-                </a>
+                </motion.a>
               ) : (
-                <a
+                <motion.a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
+                  custom={index}
+                  variants={socialVariants}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
                   className="hover:dark:text-secondary text-2xl bg-background p-2 rounded-full"
                 >
                   {icon}
-                </a>
+                </motion.a>
               )}
             </Fragment>
           ))}
