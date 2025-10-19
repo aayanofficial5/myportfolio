@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { CTAButton } from "../components/CTAButton";
 import profile from "../assets/images/profile.png";
 import { IoMdDownload } from "react-icons/io";
 import { portfolioInfo } from "../data";
 import { FaLaptop } from "react-icons/fa";
 import WordReveal from "../components/WordReveal";
+import { useRef } from "react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -27,11 +28,25 @@ const fadedItem = {
 };
 
 const Hero = () => {
+  const sectionRef = useRef(null);
+  const { scrollY } = useScroll();
+  
+  // Parallax transforms
+  const backgroundY = useTransform(scrollY, [0, 500], [0, 250]); // 0.5x speed
+  const imageY = useTransform(scrollY, [0, 500], [0, 150]); // 0.3x speed
+
   return (
     <section
+      ref={sectionRef}
       id="home"
-      className="min-h-[100vh] flex flex-col-reverse md:flex-row md:items-center justify-evenly p-6 md:p-24 bg-background dark:bg-background"
+      className="min-h-[100vh] flex flex-col-reverse md:flex-row md:items-center justify-evenly p-6 md:p-24 bg-background dark:bg-background relative overflow-hidden"
     >
+      {/* Parallax Background Layer */}
+      <motion.div
+        style={{ y: backgroundY }}
+        className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-purple-50 dark:from-blue-950/20 dark:via-transparent dark:to-purple-950/20 -z-10"
+      />
+      
       <div className="">
         <motion.div
           variants={container}
@@ -75,6 +90,7 @@ const Hero = () => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
+        style={{ y: imageY }}
         className="flex justify-center"
       >
         <motion.img
