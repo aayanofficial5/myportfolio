@@ -4,6 +4,7 @@ import profile from "../assets/images/profile.png";
 import { IoMdDownload } from "react-icons/io";
 import { portfolioInfo } from "../data";
 import { FaLaptop } from "react-icons/fa";
+import WordReveal from "../components/WordReveal";
 
 const container = {
   hidden: { opacity: 0 },
@@ -38,21 +39,28 @@ const Hero = () => {
           animate="show"
           className="space-y-8 md:max-w-[40vw]"
         >
-          <motion.h1
-            variants={item}
-            className="text-5xl md:text-6xl font-bold text-primary dark:text-primary"
-          >
-            Hi, I'm{" "}
-            <span className="text-secondary">{portfolioInfo.fullName}</span>
-          </motion.h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-primary dark:text-primary">
+            <WordReveal text="Hi, I'm" />
+            {" "}
+            <span className="text-secondary">
+              <WordReveal text={portfolioInfo.fullName} />
+            </span>
+          </h1>
           <motion.p
-            variants={fadedItem}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 0.8, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="text-xl text-primary dark:text-primary leading-relaxed"
           >
             {portfolioInfo.description}
           </motion.p>
 
-          <motion.div variants={item} className="flex flex-col gap-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
+            className="flex flex-col gap-4"
+          >
             <CTAButton link="#projects" text="View Projects" icon={FaLaptop} />
             <CTAButton
               link="/LatestResume.pdf"
@@ -64,9 +72,9 @@ const Hero = () => {
         </motion.div>
       </div>
       <motion.div
-        variants={item}
-        initial="hidden"
-        animate="show"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
         className="flex justify-center"
       >
         <motion.img
