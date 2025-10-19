@@ -2,6 +2,20 @@ import { motion } from 'framer-motion';
 
 import { projects } from '../data';
 import ProjectCard from '../components/ProjectCard';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
 const Projects = () => {
   return (
     <section id="projects" className="py-20 px-10 md:px-20 bg-accent dark:bg-accent border-t dark:border-secondary/50 min-h-screen scroll-mt-10 md:scroll-mt-0 scroll-smooth">
@@ -16,11 +30,17 @@ const Projects = () => {
           Projects
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {projects.map((project, index) => (
-          <ProjectCard project={project} key={index}/>
+          <ProjectCard project={project} key={index} variants={itemVariants} />
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

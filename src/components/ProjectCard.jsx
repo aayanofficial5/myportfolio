@@ -3,11 +3,12 @@ import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, variants }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
+      variants={variants}
       className="relative backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.01] border border-white/20 dark:border-white/10"
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
