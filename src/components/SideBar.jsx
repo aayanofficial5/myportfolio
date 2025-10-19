@@ -53,13 +53,13 @@ const SideBar = ({ showSideBar, setShowSideBar }) => {
             window.history.pushState(null, null, `#${name}`); // Update URL hash manually
             setPathName(name); // Update your state manually as well
           }}
-          className={`text-sm px-4 py-3 flex flex-col items-center justify-center opacity-80 hover:opacity-100 w-full ${
+          className={`text-sm px-4 py-4 flex flex-col items-center justify-center opacity-80 hover:opacity-100 w-full transition-all ${
             pathName === url.slice(1)
-              ? "bg-gray-700 border-r-2 md:border-r-0 md:border-l-2 opacity-100 text-blue-400"
+              ? "bg-gray-700/50 border-r-3 md:border-r-0 md:border-l-3 border-blue-400 opacity-100 text-blue-400"
               : ""
           }`}
         >
-          <div className="text-[25px]">{icon}</div>
+          <div className="text-[26px] mb-1">{icon}</div>
           {name.split("")[0].toUpperCase() + name.slice(1)}
         </a>
       ))}
