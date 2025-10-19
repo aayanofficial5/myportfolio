@@ -5,7 +5,8 @@ import { IoMdDownload } from "react-icons/io";
 import { portfolioInfo } from "../data";
 import { FaLaptop } from "react-icons/fa";
 import WordReveal from "../components/WordReveal";
-import { useRef } from "react";
+import ResumePreviewModal from "../components/ResumePreviewModal";
+import { useRef, useState } from "react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -30,6 +31,7 @@ const fadedItem = {
 const Hero = () => {
   const sectionRef = useRef(null);
   const { scrollY } = useScroll();
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   
   // Parallax transforms
   const backgroundY = useTransform(scrollY, [0, 500], [0, 250]); // 0.5x speed
@@ -78,8 +80,7 @@ const Hero = () => {
           >
             <CTAButton link="#projects" text="View Projects" icon={FaLaptop} />
             <CTAButton
-              link="/LatestResume.pdf"
-              download={true}
+              onClick={() => setIsResumeModalOpen(true)}
               icon={IoMdDownload}
               text="Download Resume"
             />
@@ -102,6 +103,13 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
         />
       </motion.div>
+
+      {/* Resume Preview Modal */}
+      <ResumePreviewModal
+        isOpen={isResumeModalOpen}
+        onClose={() => setIsResumeModalOpen(false)}
+        pdfUrl="/LatestResume.pdf"
+      />
     </section>
   );
 };
