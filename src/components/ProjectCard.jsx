@@ -8,14 +8,14 @@ const ProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      className="relative bg-background/45 rounded-xl shadow-lg overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.01] border border-secondary/30 dark:border-secondary/30"
+      className="relative backdrop-blur-lg bg-white/70 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-[1.01] border border-white/20 dark:border-white/10"
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Animated Title Overlay */}
       <motion.div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm z-20 flex items-center justify-center p-6"
+        className="absolute inset-0 bg-background/90 backdrop-blur-md z-20 flex items-center justify-center p-6"
         initial={{ opacity: 1 }}
         animate={
           isHovered
@@ -33,7 +33,7 @@ const ProjectCard = ({ project }) => {
       <motion.img
         src={project.image}
         alt={project.title}
-        className="aspect-auto border-b border-secondary/30 transition duration-500"
+        className="aspect-auto border-b border-white/20 dark:border-white/10 transition duration-500"
         loading="lazy"
         initial={{ scale: 1 }}
         animate={isHovered ? { scale: 1.02 } : { scale: 1 }}
@@ -71,7 +71,7 @@ const ProjectCard = ({ project }) => {
               {project.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="text-xs md:text-xs capitalize bg-background text-primary border border-secondary/50 px-3 py-1 md:py-1 rounded-full tracking-wide shadow-sm"
+                  className="text-xs md:text-xs capitalize bg-white/90 dark:bg-gray-800/90 text-primary border border-secondary/50 px-3 py-1 md:py-1 rounded-full tracking-wide shadow-sm"
                 >
                   {tag}
                 </span>
