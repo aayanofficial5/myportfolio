@@ -2,6 +2,20 @@ import { motion } from 'framer-motion';
 import LanguageIcon from '../components/LanguageIcon';
 import { skills } from '../data';
 import SkillCard from '../components/SkillCard';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 const Skills = () => {
   return (
     <section
@@ -19,12 +33,17 @@ const Skills = () => {
       Skills
     </h2>
 
-    <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-8 max-w-[90vw] relative pt-8">
-
+    <motion.div 
+      className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-8 max-w-[90vw] relative pt-8"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-100px" }}
+    >
       {skills.map((language, index) => (
-        <SkillCard language={language} key={index} />
+        <SkillCard language={language} key={index} variants={itemVariants} />
       ))}
-    </div>
+    </motion.div>
   </motion.div>
 </section>
 
