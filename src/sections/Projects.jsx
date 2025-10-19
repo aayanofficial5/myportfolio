@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 
 import { projects } from '../data';
 import ProjectCard from '../components/ProjectCard';
+import WordReveal from '../components/WordReveal';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -27,7 +28,7 @@ const Projects = () => {
         className="max-w-6xl mx-auto"
       >
         <h2 className="text-4xl md:text-4xl font-bold text-center mb-12 text-primary dark:text-primary">
-          Projects
+          <WordReveal text="Projects" />
         </h2>
 
         <motion.div 

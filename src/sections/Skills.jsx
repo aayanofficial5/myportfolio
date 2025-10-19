@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import LanguageIcon from '../components/LanguageIcon';
 import { skills } from '../data';
 import SkillCard from '../components/SkillCard';
+import WordReveal from '../components/WordReveal';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,7 +31,7 @@ const Skills = () => {
     className="max-w-6xl flex flex-col items-center"
   >
     <h2 className="text-4xl md:text-4xl font-bold text-center text-primary dark:text-primary mb-8">
-      Skills
+      <WordReveal text="Skills" />
     </h2>
 
     <motion.div 
