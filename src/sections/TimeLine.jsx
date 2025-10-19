@@ -3,6 +3,20 @@ import { Briefcase, GraduationCap } from 'lucide-react';
 
 import { timeline } from '../data';
 import TimelineItem from './../components/TimelineItem';
+import WordReveal from '../components/WordReveal';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+};
 
 const Timeline = () => {
   return (
@@ -15,14 +29,20 @@ const Timeline = () => {
         className="max-w-4xl mx-auto"
       >
         <h2 className="text-4xl md:text-4xl font-bold text-center mb-12 text-primary dark:text-primary">
-          Timeline
+          <WordReveal text="Timeline" />
         </h2>
 
-        <div className="relative border-l-3 border-secondary dark:border-secondary/60 w-full">
+        <motion.div 
+          className="relative border-l-3 border-secondary dark:border-secondary/60 w-full"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {timeline.map((item, index) => (
-            <TimelineItem item={item} key={index}/>
+            <TimelineItem item={item} key={index} variants={itemVariants} />
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

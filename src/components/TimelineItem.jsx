@@ -1,9 +1,13 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Briefcase, GraduationCap } from "lucide-react";
 
-const TimelineItem = ({ item }) => {
+const TimelineItem = ({ item, variants }) => {
   return (
-    <div className="mb-12 ml-6 flex items-center group">
+    <motion.div 
+      variants={variants}
+      className="mb-12 ml-6 flex items-center group"
+    >
       <span className="absolute -left-5 bg-secondary rounded-full pt-1.5 px-1.5">
         {item.type === "work" ? (
           <button title="Work">
@@ -26,7 +30,7 @@ const TimelineItem = ({ item }) => {
           {item.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
